@@ -1,0 +1,75 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python ../src/prepare.py ../data/data.xml ../data/data.csv
+    deps:
+    - path: ../data/data.xml
+      hash: md5
+      md5: 22a1a2931c8370d3aeedd7183606fd7f
+      size: 14445097
+    - path: ../src/prepare.py
+      hash: md5
+      md5: f2f47ec6ad799943dbc76722909a3770
+      size: 1716
+    outs:
+    - path: ../data/data.csv
+      hash: md5
+      md5: c46eaa72af81092a157c87f65f4c1b74
+      size: 9206521
+  featurize:
+    cmd: python ../src/featurize.py ../data/data.csv ../data/features.csv
+    deps:
+    - path: ../data/data.csv
+      hash: md5
+      md5: c46eaa72af81092a157c87f65f4c1b74
+      size: 9206521
+    - path: ../src/featurize.py
+      hash: md5
+      md5: 698d9c0d888bb0cb082ea2d735ed7abe
+      size: 1266
+    outs:
+    - path: ../data/features.csv
+      hash: md5
+      md5: 251f721e20f55ca71d963b2a411abe3a
+      size: 18000075
+  train:
+    cmd: python ../src/train.py ../data/features.csv ../models/model.pkl
+    deps:
+    - path: ../data/features.csv
+      hash: md5
+      md5: 251f721e20f55ca71d963b2a411abe3a
+      size: 18000075
+    - path: ../src/train.py
+      hash: md5
+      md5: 5a6af53e7a928ac5422e702f2bf88b9b
+      size: 1389
+    params:
+      ../params.yaml:
+        train.max_iter: 1500
+        train.model_type: LogisticRegression
+        train.threshold: 0.5
+    outs:
+    - path: ../models/model.pkl
+      hash: md5
+      md5: 2ab360730690f85103645a17b04c0024
+      size: 7327
+  evaluate:
+    cmd: python ../src/evaluate.py ../models/model.pkl ../data/features.csv ../02_experiment_tracking/metrics/metrics.json
+    deps:
+    - path: ../data/features.csv
+      hash: md5
+      md5: 251f721e20f55ca71d963b2a411abe3a
+      size: 18000075
+    - path: ../models/model.pkl
+      hash: md5
+      md5: 2ab360730690f85103645a17b04c0024
+      size: 7327
+    - path: ../src/evaluate.py
+      hash: md5
+      md5: 5136808ad87989ed3b3a7f28909e0bd0
+      size: 1866
+    outs:
+    - path: ../02_experiment_tracking/metrics/metrics.json
+      hash: md5
+      md5: dd6b38ff8e00a3ed86aa4060911121a0
+      size: 138

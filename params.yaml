@@ -1,0 +1,4 @@
+train:
+  model_type: LogisticRegression
+  max_iter: 1500
+  threshold: 0.5

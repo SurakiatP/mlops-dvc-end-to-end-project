@@ -1,0 +1,27 @@
+# Python virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# DVC cache
+.dvc/cache/
+.dvc/tmp/
+*.dvc
+
+# DVC experiment reports
+*.tsv
+*.json
+*.pkl
+dvclive/
+
+# VSCode / IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs.txt
+
+# OS-generated
+.DS_Store
+Thumbs.db

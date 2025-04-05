@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="5">
+    <title>DVC Plot</title>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+    
+    <style>
+        table {
+            border-spacing: 15px;
+        }
+    </style>
+</head>
+<body>
+    
+        <div id="metrics_json" style="text-align: center; padding: 10x">
+            <p>metrics_json</p>
+            <div style="display: flex;justify-content: center;">
+                <table>
+<thead>
+<tr><th style="text-align: right;">  eval_accuracy</th><th style="text-align: right;">  eval_precision</th><th style="text-align: right;">  eval_recall</th><th style="text-align: right;">  eval_f1</th><th style="text-align: right;">  step</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: right;">         0.8131</td><td style="text-align: right;">         0.87193</td><td style="text-align: right;">     0.828894</td><td style="text-align: right;"> 0.849867</td><td style="text-align: right;">     0</td></tr>
+</tbody>
+</table>
+            </div>
+        </div>
+
+    <div id = "static_eval_accuracy">
+        <script type = "text/javascript">
+            var spec = {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"values": [{"step": "0", "eval_accuracy": "0.8131", "rev": "workspace"}]}, "title": {"text": "eval_accuracy", "anchor": "middle"}, "width": 300, "height": 300, "params": [{"name": "smooth", "value": 0.001, "bind": {"input": "range", "min": 0.001, "max": 1, "step": 0.001}}], "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "color": {"field": "rev", "scale": {"domain": ["workspace"], "range": ["#945dd6"]}}, "strokeDash": {}}, "layer": [{"layer": [{"params": [{"name": "grid", "select": "interval", "bind": "scales"}], "mark": "line"}, {"transform": [{"filter": {"param": "hover", "empty": false}}], "mark": "point"}], "encoding": {"y": {"field": "eval_accuracy", "type": "quantitative", "title": "eval_accuracy", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}, "transform": [{"loess": "eval_accuracy", "on": "step", "groupby": ["rev"], "bandwidth": {"signal": "smooth"}}]}, {"mark": {"type": "line", "opacity": 0.2}, "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "y": {"field": "eval_accuracy", "type": "quantitative", "title": "eval_accuracy", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}, {"mark": {"type": "circle", "size": 10}, "encoding": {"x": {"aggregate": "max", "field": "step", "type": "quantitative", "title": "step"}, "y": {"aggregate": {"argmax": "step"}, "field": "eval_accuracy", "type": "quantitative", "title": "eval_accuracy", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}, {"transform": [{"calculate": "datum.rev", "as": "pivot_field"}, {"pivot": "pivot_field", "op": "mean", "value": "eval_accuracy", "groupby": ["step"]}], "mark": {"type": "rule", "tooltip": {"content": "data"}, "stroke": "grey"}, "encoding": {"opacity": {"condition": {"value": 0.3, "param": "hover", "empty": false}, "value": 0}}, "params": [{"name": "hover", "select": {"type": "point", "fields": ["step"], "nearest": true, "on": "mouseover", "clear": "mouseout"}}]}]};
+            vegaEmbed('#static_eval_accuracy', spec);
+        </script>
+    </div>
+    
+
+    <div id = "static_eval_f1">
+        <script type = "text/javascript">
+            var spec = {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"values": [{"step": "0", "eval_f1": "0.8498674592336734", "rev": "workspace"}]}, "title": {"text": "eval_f1", "anchor": "middle"}, "width": 300, "height": 300, "params": [{"name": "smooth", "value": 0.001, "bind": {"input": "range", "min": 0.001, "max": 1, "step": 0.001}}], "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "color": {"field": "rev", "scale": {"domain": ["workspace"], "range": ["#945dd6"]}}, "strokeDash": {}}, "layer": [{"layer": [{"params": [{"name": "grid", "select": "interval", "bind": "scales"}], "mark": "line"}, {"transform": [{"filter": {"param": "hover", "empty": false}}], "mark": "point"}], "encoding": {"y": {"field": "eval_f1", "type": "quantitative", "title": "eval_f1", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}, "transform": [{"loess": "eval_f1", "on": "step", "groupby": ["rev"], "bandwidth": {"signal": "smooth"}}]}, {"mark": {"type": "line", "opacity": 0.2}, "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "y": {"field": "eval_f1", "type": "quantitative", "title": "eval_f1", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}, {"mark": {"type": "circle", "size": 10}, "encoding": {"x": {"aggregate": "max", "field": "step", "type": "quantitative", "title": "step"}, "y": {"aggregate": {"argmax": "step"}, "field": "eval_f1", "type": "quantitative", "title": "eval_f1", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}, {"transform": [{"calculate": "datum.rev", "as": "pivot_field"}, {"pivot": "pivot_field", "op": "mean", "value": "eval_f1", "groupby": ["step"]}], "mark": {"type": "rule", "tooltip": {"content": "data"}, "stroke": "grey"}, "encoding": {"opacity": {"condition": {"value": 0.3, "param": "hover", "empty": false}, "value": 0}}, "params": [{"name": "hover", "select": {"type": "point", "fields": ["step"], "nearest": true, "on": "mouseover", "clear": "mouseout"}}]}]};
+            vegaEmbed('#static_eval_f1', spec);
+        </script>
+    </div>
+    
+
+    <div id = "static_eval_precision">
+        <script type = "text/javascript">
+            var spec = {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"values": [{"step": "0", "eval_precision": "0.8719301137300148", "rev": "workspace"}]}, "title": {"text": "eval_precision", "anchor": "middle"}, "width": 300, "height": 300, "params": [{"name": "smooth", "value": 0.001, "bind": {"input": "range", "min": 0.001, "max": 1, "step": 0.001}}], "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "color": {"field": "rev", "scale": {"domain": ["workspace"], "range": ["#945dd6"]}}, "strokeDash": {}}, "layer": [{"layer": [{"params": [{"name": "grid", "select": "interval", "bind": "scales"}], "mark": "line"}, {"transform": [{"filter": {"param": "hover", "empty": false}}], "mark": "point"}], "encoding": {"y": {"field": "eval_precision", "type": "quantitative", "title": "eval_precision", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}, "transform": [{"loess": "eval_precision", "on": "step", "groupby": ["rev"], "bandwidth": {"signal": "smooth"}}]}, {"mark": {"type": "line", "opacity": 0.2}, "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "y": {"field": "eval_precision", "type": "quantitative", "title": "eval_precision", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}, {"mark": {"type": "circle", "size": 10}, "encoding": {"x": {"aggregate": "max", "field": "step", "type": "quantitative", "title": "step"}, "y": {"aggregate": {"argmax": "step"}, "field": "eval_precision", "type": "quantitative", "title": "eval_precision", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}, {"transform": [{"calculate": "datum.rev", "as": "pivot_field"}, {"pivot": "pivot_field", "op": "mean", "value": "eval_precision", "groupby": ["step"]}], "mark": {"type": "rule", "tooltip": {"content": "data"}, "stroke": "grey"}, "encoding": {"opacity": {"condition": {"value": 0.3, "param": "hover", "empty": false}, "value": 0}}, "params": [{"name": "hover", "select": {"type": "point", "fields": ["step"], "nearest": true, "on": "mouseover", "clear": "mouseout"}}]}]};
+            vegaEmbed('#static_eval_precision', spec);
+        </script>
+    </div>
+    
+
+    <div id = "static_eval_recall">
+        <script type = "text/javascript">
+            var spec = {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"values": [{"step": "0", "eval_recall": "0.8288937637104355", "rev": "workspace"}]}, "title": {"text": "eval_recall", "anchor": "middle"}, "width": 300, "height": 300, "params": [{"name": "smooth", "value": 0.001, "bind": {"input": "range", "min": 0.001, "max": 1, "step": 0.001}}], "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "color": {"field": "rev", "scale": {"domain": ["workspace"], "range": ["#945dd6"]}}, "strokeDash": {}}, "layer": [{"layer": [{"params": [{"name": "grid", "select": "interval", "bind": "scales"}], "mark": "line"}, {"transform": [{"filter": {"param": "hover", "empty": false}}], "mark": "point"}], "encoding": {"y": {"field": "eval_recall", "type": "quantitative", "title": "eval_recall", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}, "transform": [{"loess": "eval_recall", "on": "step", "groupby": ["rev"], "bandwidth": {"signal": "smooth"}}]}, {"mark": {"type": "line", "opacity": 0.2}, "encoding": {"x": {"field": "step", "type": "quantitative", "title": "step"}, "y": {"field": "eval_recall", "type": "quantitative", "title": "eval_recall", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}, {"mark": {"type": "circle", "size": 10}, "encoding": {"x": {"aggregate": "max", "field": "step", "type": "quantitative", "title": "step"}, "y": {"aggregate": {"argmax": "step"}, "field": "eval_recall", "type": "quantitative", "title": "eval_recall", "scale": {"zero": false}}, "color": {"field": "rev", "type": "nominal"}}}, {"transform": [{"calculate": "datum.rev", "as": "pivot_field"}, {"pivot": "pivot_field", "op": "mean", "value": "eval_recall", "groupby": ["step"]}], "mark": {"type": "rule", "tooltip": {"content": "data"}, "stroke": "grey"}, "encoding": {"opacity": {"condition": {"value": 0.3, "param": "hover", "empty": false}, "value": 0}}, "params": [{"name": "hover", "select": {"type": "point", "fields": ["step"], "nearest": true, "on": "mouseover", "clear": "mouseout"}}]}]};
+            vegaEmbed('#static_eval_recall', spec);
+        </script>
+    </div>
+    
+</body>
+</html>

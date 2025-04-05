@@ -1,0 +1,74 @@
+stages:
+  prepare:
+    cmd: python ../src/prepare.py ../data/data.xml ../data/data.csv
+    deps:
+    - ../src/prepare.py
+    - ../data/data.xml
+    outs:
+    - ../data/data.csv
+
+  featurize:
+    cmd: python ../src/featurize.py ../data/data.csv ../data/features.csv
+    deps:
+    - ../src/featurize.py
+    - ../data/data.csv
+    outs:
+    - ../data/features.csv
+
+  train:
+    cmd: python ../src/train.py ../data/features.csv ../models/model.pkl
+    deps:
+    - ../src/train.py
+    - ../data/features.csv
+    params:
+    - ../params.yaml:
+      - train.model_type
+      - train.max_iter
+      - train.threshold
+    outs:
+    - ../models/model.pkl
+
+  evaluate:
+    cmd: python ../src/evaluate.py ../models/model.pkl ../data/features.csv ../02_experiment_tracking/metrics/metrics.json
+    deps:
+    - ../src/evaluate.py
+    - ../models/model.pkl
+    - ../data/features.csv
+    outs:
+    - ../02_experiment_tracking/metrics/metrics.json
+
+metrics:
+- ../02_experiment_tracking/metrics/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+- ../02_experiment_tracking/metrics.json
+plots:
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
+- ../02_experiment_tracking/plots/metrics:
+    x: step
