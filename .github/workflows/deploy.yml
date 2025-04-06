@@ -30,13 +30,13 @@ jobs:
 
     - name: 🔐 Create Google Drive credentials file
       run: |
-        echo "${{ secrets.GDRIVE_CREDENTIALS }}" > gdrive_creds.json
+        echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}" > gdrive_creds.json
 
     - name: ⚙️ Configure DVC Remote
       run: |
         dvc remote add -f -d $DVC_REMOTE_NAME $DVC_REMOTE_URL
         dvc remote modify $DVC_REMOTE_NAME gdrive_use_service_account true
-        dvc remote modify $DVC_REMOTE_NAME gdrive_service_account_json_file_path gdrive_creds.json
+        dvc remote modify $DVC_REMOTE_NAME gdrive_service_account_json_file gdrive_creds.json
 
     - name: 📦 Pull model from DVC Remote
       run: |
@@ -45,5 +45,3 @@ jobs:
     - name: 🧪 (Optional) Test Serve API
       run: |
         echo "✅ Model pulled successfully. Ready for deployment!"
-        # You could run `python 04_model_deployment/serve_model.py` here if using self-host or docker, etc.
-
