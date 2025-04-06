@@ -1,0 +1,49 @@
+name: 🚀 Deploy Model API
+
+on:
+  push:
+    branches: ["master"]
+    paths:
+      - models/**
+      - 04_model_deployment/**
+      - .github/workflows/deploy.yml
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: .secrets/gdrive_service_account.json
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install -r 04_model_deployment/requirements.txt
+          pip install dvc[gdrive] --quiet
+
+      - name: 🔐 Setup DVC Secrets
+        run: |
+          mkdir -p .secrets
+          echo "${{ secrets.GDRIVE_CREDENTIALS }}" > .secrets/gdrive_service_account.json
+
+      - name: ☁️ Configure DVC Remote (Google Drive)
+        run: |
+          dvc remote add -d myremote gdrive://<your-gdrive-folder-id>
+          dvc remote modify myremote gdrive_use_service_account true
+          dvc remote modify myremote gdrive_service_account_json_file_path .secrets/gdrive_service_account.json
+
+      - name: 📥 Pull Model Artifacts with DVC
+        run: dvc pull models/model.pkl
+
+      - name: 🚀 Deploy FastAPI (Example with uvicorn)
+        run: |
+          echo "Starting FastAPI app for testing..."
+          uvicorn 04_model_deployment.serve_model:app --host 0.0.0.0 --port 8000

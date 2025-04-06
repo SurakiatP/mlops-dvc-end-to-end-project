@@ -1,0 +1,5 @@
+outs:
+- md5: 4fb06804ca3c8e719c26ce8842c506a9
+  size: 14455114
+  hash: md5
+  path: fixed_data.xml
