@@ -33,7 +33,7 @@ jobs:
       
     - name: 🔐 Create Google Drive credentials file
       run: |
-        echo "${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}" > gdrive_creds.json
+        printf '%s' "${{ secrets.GDRIVE_SERVICE_ACCOUNT_JSON }}" > gdrive_creds.json
 
     - name: ⚙️ Configure DVC Remote
       run: |
