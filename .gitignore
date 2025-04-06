@@ -25,3 +25,5 @@ logs.txt
 # OS-generated
 .DS_Store
 Thumbs.db
+
+.secrets/
