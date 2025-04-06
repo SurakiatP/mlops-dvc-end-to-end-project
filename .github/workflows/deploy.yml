@@ -1,0 +1,49 @@
+name: 🚀 Deploy Model with DVC + GDrive
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      DVC_REMOTE_NAME: myremote
+      DVC_REMOTE_URL: gdrive://1JI4acT5z9AFodYdXCrcAvyFpEtGucwoC
+
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v3
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r 04_model_deployment/requirements.txt
+        pip install dvc[gdrive]
+
+    - name: 🔐 Create Google Drive credentials file
+      run: |
+        echo "${{ secrets.GDRIVE_CREDENTIALS }}" > gdrive_creds.json
+
+    - name: ⚙️ Configure DVC Remote
+      run: |
+        dvc remote add -d $DVC_REMOTE_NAME $DVC_REMOTE_URL
+        dvc remote modify $DVC_REMOTE_NAME gdrive_use_service_account true
+        dvc remote modify $DVC_REMOTE_NAME gdrive_service_account_json_file_path gdrive_creds.json
+
+    - name: 📦 Pull model from DVC Remote
+      run: |
+        dvc pull models/model.pkl
+
+    - name: 🧪 (Optional) Test Serve API
+      run: |
+        echo "✅ Model pulled successfully. Ready for deployment!"
+        # You could run `python 04_model_deployment/serve_model.py` here if using self-host or docker, etc.
+
