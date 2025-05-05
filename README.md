@@ -1,15 +1,15 @@
-﻿# 🚀 MLOps DVC End-to-End Project
+﻿# MLOps DVC End-to-End Project
 
 This project showcases a full Machine Learning Operations (MLOps) pipeline using `DVC (Data Version Control)`, `GitHub Actions` for CI/CD, and `Google Drive` as remote storage. The goal is to demonstrate real-world ML engineering practices from data versioning to automated model deployment.
 
 ---
-## 🧱 Project Workflow Architecture
+## Project Workflow Architecture
 
 ![alt text](project_workflow.png)
 
 ---
 
-## 🎯 Project Goals
+## Project Goals
 
 - Build a reproducible and modular ML pipeline using best MLOps practices.
 - Version control datasets, models, and experiments with `DVC`.
@@ -19,7 +19,7 @@ This project showcases a full Machine Learning Operations (MLOps) pipeline using
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 mlops-dvc-end-to-end-project/
@@ -82,7 +82,7 @@ mlops-dvc-end-to-end-project/
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 - Dataset: StackOverflow posts (from DVC's sample repo)
 - Format: XML → Cleaned CSV
@@ -91,7 +91,7 @@ mlops-dvc-end-to-end-project/
 
 ---
 
-## 🔄 Pipeline Overview
+## Pipeline Overview
 
 1. **ETL (00_data_versioning/):**
    - Load and clean `data.xml` into `data.csv`
@@ -125,7 +125,7 @@ mlops-dvc-end-to-end-project/
 
 ---
 
-## 🧠 ML Model Info
+## ML Model Info
 
 - Model Type: Logistic Regression (baseline)
 - Libraries used:
@@ -136,7 +136,7 @@ mlops-dvc-end-to-end-project/
 
 ---
 
-## 🧪 Sample Input for API
+## Sample Input for API
 
 ```json
 {
@@ -145,7 +145,7 @@ mlops-dvc-end-to-end-project/
 
 ```
 ---
-## 📈 Visualizations
+## Visualizations
 
 | Metric    | Plot                 |
 | --------- | -------------------- |
@@ -158,13 +158,13 @@ mlops-dvc-end-to-end-project/
 - All stored in `02_experiment_tracking/plots/`
 ---
 
-## 📦 Requirements
+## Requirements
 Install requirements:
 ```bash
 pip install -r 04_model_deployment/requirements.txt
 ```
 ---
-## ⚙️ Reproducibility
+##  Reproducibility
 ```bash
 # Rebuild entire pipeline
 dvc repro
@@ -176,7 +176,7 @@ dvc exp show
 dvc plots show
 ```
 ---
-## 🔐 Google Drive Remote (DVC)
+## Google Drive Remote (DVC)
 - Remote name: myremote
 - Configured in GitHub Actions with:
     - `GDRIVE_REMOTE_NAME`
@@ -184,20 +184,20 @@ dvc plots show
     - `GDRIVE_PROJECT_DIR`
 
 ---
-## ✅ Deployment via GitHub Actions
+## Deployment via GitHub Actions
 - Trigger: git push to master
 - Workflow: `.github/workflows/deploy.yml`
 - Auto-pull model from `GDrive`
 - Test API with sample input
 
 ---
-## 📌 Key Learnings & Takeaways
+## Key Learnings & Takeaways
 - Building a modular, testable ML pipeline improves maintainability.
 - `DVC` + `GitHub Actions` is a powerful combo for versioning and automation.
 - Structuring projects with MLOps principles sets the foundation for production ML systems.
 
 ---
-## 🔮 Next Steps
+## Next Steps
 - Integrate monitoring (e.g., `Prometheus` + `Grafana`)
 - Extend to batch predictions or real-time streaming
 - Upgrade to model registry tools like `MLflow` or `Weights & Biases`
