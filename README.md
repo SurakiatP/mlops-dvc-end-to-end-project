@@ -1,5 +1,7 @@
 ﻿# MLOps DVC End-to-End Project
 
+ ## LinkedIn Post >> https://www.linkedin.com/posts/surakiat-kansa-ard-171942351_machinelearning-mlops-dvc-activity-7314639758054346752-Rf2C/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFfhzmUB4WlIO47UV21HFYwE3cHBLvtpy4A
+
 This project showcases a full Machine Learning Operations (MLOps) pipeline using `DVC (Data Version Control)`, `GitHub Actions` for CI/CD, and `Google Drive` as remote storage. The goal is to demonstrate real-world ML engineering practices from data versioning to automated model deployment.
 
 ---
